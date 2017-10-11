@@ -1,0 +1,5 @@
+spring:
+    http:
+        multipart:
+            max-file-size: 2MB
+# Can be set programatically

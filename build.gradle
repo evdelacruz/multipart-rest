@@ -1,0 +1,53 @@
+group 'com.evdelacruz.samples'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+compileJava.options.encoding = 'UTF-8'
+
+sourceCompatibility = 1.8
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.spring.platform:platform-bom:Brussels-SR5'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+}
+
+bootRepackage {
+    mainClass = 'com.evdelacruz.samples.multipartrest.Main'
+    executable = true
+}
+
+jar {
+    manifest {
+        attributes 'Specification-Vendor'       : 'Erick\'s Software',
+                   'Specification-Version'      : version,
+                   'Specification-Title'        : 'MultiPart REST Example',
+                   'Implementation-Vendor'	    : 'Erick Vega De la Cruz',
+                   'Implementation-Version'	    : (null != System.env.BUILD_NUMBER) ? System.env.BUILD_NUMBER : '0',
+                   'Implementation-Title'	    : 'multipart-rest',
+                   'Implementation-Unit'   	    : '501-1',
+                   'Java-Specification-Version' : sourceCompatibility
+    }
+    baseName = 'crss-push'
+}

@@ -1,0 +1,10 @@
+#Gradle
+.gradle
+/build/
+/*/*/.gradle
+/*/*/build/
+
+# IDE(s) Files
+/.idea/
+/classes/
+/out/
